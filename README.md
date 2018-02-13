@@ -47,6 +47,40 @@ docker create \
 	linuxserver/letsencrypt
 ```
 
+### Gitlab Runner
+
+```
+docker run -d \
+    --name gitlab-runner \
+    --restart always \
+    --network=beaver \
+    -v /srv/gitlab-runner/config:/etc/gitlab-runner \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    gitlab/gitlab-runner:latest
+```
+
+#### Docs for Runner 
+```
+https://docs.gitlab.com/runner/install/docker.html#installing-trusted-ssl-server-certificates
+https://docs.gitlab.com/ce/ci/runners/
+https://docs.gitlab.com/runner/register/index.html
+https://docs.gitlab.com/runner/executors/
+```
+
+#### Configure Runner
+```
+apt-get insall xz-utils
+
+docker exec -it gitlab-runner gitlab-runner register
+```
+
+### Run Unsecure jobs
+Add this to your .gitlab-ci.yml :
+```
+variables:
+  GIT_SSL_NO_VERIFY: "true"
+```
+
 ### Insecure Nginx
 ``` 
 docker create \
