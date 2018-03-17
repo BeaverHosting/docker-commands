@@ -12,7 +12,7 @@ You need docker
 
 ### Gitlab
 ```
-docker run --detach \
+docker run -d \
     --hostname git.beaverhosting.fr \
     --publish 127.0.0.1:543:443 \
     --publish 127.0.0.1:8180:80 \
@@ -34,13 +34,12 @@ docker create \
 	--network=beaver \
 	--name=nginx \
 	-v /srv/nginx:/config \
-	-v /srv/nginx/letsencrypt:/etc/letsencrypt \
-	-v /srv/nginx/letsencrypt-log:/var/log/letsencrypt \
 	-e PGID=1004 \
 	-e PUID=1003 \
-	-e EMAIL=beaverhosting@protonmail.com \
+	-e EMAIL=contact@beaverhosting.fr \
 	-e URL=beaverhosting.fr \
-	-e SUBDOMAINS=www,git,nexus,registry \
+	-e SUBDOMAINS=www,git,registry \
+	-e VALIDATION=http \
 	-p 80:80 \
 	-p 443:443 \
 	-e TZ=Europe/Paris \
