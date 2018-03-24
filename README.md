@@ -38,7 +38,7 @@ docker create \
 	-e PUID=1003 \
 	-e EMAIL=contact@beaverhosting.fr \
 	-e URL=beaverhosting.fr \
-	-e SUBDOMAINS=www,git,registry \
+	-e SUBDOMAINS=www,git,registry,cloudnext \
 	-e VALIDATION=http \
 	-p 80:80 \
 	-p 443:443 \
@@ -152,4 +152,7 @@ docker login registry.beaverhosting.fr
 user: testuser
 password: test.......
 ```
+
+### Nextcloud
+docker run -d --network=beaver --restart=always -v /srv/nextcloud:/var/www/html --name nextcloud nextcloud
 
